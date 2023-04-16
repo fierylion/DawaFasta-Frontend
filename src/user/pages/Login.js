@@ -24,16 +24,19 @@ const Login = () => {
         
       )
        document.cookie = 'Authorization=Bearer ' + data.token
-       setLoading(false)
+       localStorage.setItem('DawaFasta', JSON.stringify({'isUser':true, 'user':{user_name:data.data.username, user_id: data.data.id, name:data.data.name, token:data.token}}))
+       
        window.location.pathname = 'user/' + data.data.name
       }
       catch(err){
         console.log(err)
       if(err.code==='ERR_BAD_REQUEST'&& err.response.data.err==='Invalid credentials'){
-        setLoading(false)
         setInvalid(true);
         return 
       }}
+      finally{
+        setLoading(false)
+      }
      
     }
     submitData();

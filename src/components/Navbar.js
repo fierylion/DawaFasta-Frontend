@@ -2,8 +2,13 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import logo from '../images/logo.png'
 import BsFillCaretDownFill from 'react-icons/bs'
-
+import {ImProfile} from 'react-icons/im'
+import {AiFillSetting} from 'react-icons/ai'
+import {BiPurchaseTagAlt} from 'react-icons/bi'
+import {CgLogOut} from 'react-icons/cg'
+import { useMajorGlobalContext } from '../context'
 const Navbar = () => {
+  const {authenticatee, details, setDetails, setAuthenticatee} = useMajorGlobalContext();
   return (
     <>
       <nav
@@ -44,52 +49,99 @@ const Navbar = () => {
             <div className='offcanvas-body'>
               <ul className='navbar-nav justify-content-end flex-grow-1 pe-3'>
                 <li className='nav-item'>
-                  
-                    <a className='nav-link active' aria-current='page' href='/'>
-                      Home
-                    </a>
-        
-                </li>
-                <li className='nav-item'>
-                  
-                    <a className='nav-link active' aria-current='page' href='/register'>
-                      Register
-                    </a>
-            
-                </li>
-                <li className='nav-item'> 
-                    <a className='nav-link active' href='/about'>
-                      About Us
-                    </a>
-                </li>
-                <li className='nav-item dropdown'>
-                  <a
-                    className='nav-link dropdown-toggle'
-                    href='#'
-                    role='button'
-                    data-bs-toggle='dropdown'
-                    aria-expanded='false'
-                  >
-                    Login
+                  <a className='nav-link active' aria-current='page' href='/'>
+                    Home
                   </a>
-                  <ul className='dropdown-menu'>
-                    <li>
-                      <a className='dropdown-item' href='/company/login'>
-                        Company Login
-                      </a>
-                    </li>
-                    <li>
-                      <hr className='dropdown-divider' />
-                    </li>
-                    <li>
-                      <a className='dropdown-item' href='/user/login'>
-                        Customer Login
-                      </a>
-                    </li>
-                  </ul>
                 </li>
+                {authenticatee===''&& (
+                  <li className='nav-item'>
+                    <a
+                      className='nav-link active'
+                      aria-current='page'
+                      href='/register'
+                    >
+                     Register
+                    </a>
+                  </li>
+                )}
+                { authenticatee==='user' &&
+                <>
+                  <li className='nav-item mx-4'>
+                    <a
+                      className='nav-link active'
+                      aria-current='page'
+                      href={`/user/${details.user_name}`}
+                    >
+                     <ImProfile/> My Profile
+                    </a>
+                  </li>
+                  <li className='nav-item mx-4'>
+                    <a
+                      className='nav-link active'
+                      aria-current='page'
+                      href={`/user/${details.user_name}/settings`}
+                    >
+                      <AiFillSetting/> Settings
+                    </a>
+                  </li>
+                  <li className='nav-item mx-4'>
+                    <a
+                      className='nav-link active'
+                      aria-current='page'
+                      href={`/user/${details.user_name}/purchases`}
+                    >
+                     <BiPurchaseTagAlt/> My Purchases
+                    </a>
+                  </li>
+                  <li className='nav-item mx-4'>
+                    <button
+                      className='btn btn-danger'
+                      aria-current='page'
+                      onClick={()=>{
+                        setAuthenticatee('')
+                        setDetails('')
+                        localStorage.clear()
+                      }}
+                    >
+                     <CgLogOut/> Log out
+                    </button>
+                  </li>
+                </>}
+                <li className='nav-item'>
+                  <a className='nav-link active' href='/about'>
+                    About Us
+                  </a>
+                </li>
+                {authenticatee==='' && (
+                  <li className='nav-item dropdown'>
+                    <a
+                      className='nav-link dropdown-toggle'
+                      href='#'
+                      role='button'
+                      data-bs-toggle='dropdown'
+                      aria-expanded='false'
+                    >
+                      Login
+                    </a>
+                    <ul className='dropdown-menu'>
+                      <li>
+                        <a className='dropdown-item' href='/company/login'>
+                          Company Login
+                        </a>
+                      </li>
+                      <li>
+                        <hr className='dropdown-divider' />
+                      </li>
+                      <li>
+                        <a className='dropdown-item' href='/user/login'>
+                          Customer Login
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                )}
               </ul>
-              <form className='d-flex mt-3 mt-lg-0' role='search'>
+              {/* {<form className='d-flex mt-3 mt-lg-0' role='search'>
                 <input
                   className='form-control me-2'
                   type='search'
@@ -99,7 +151,7 @@ const Navbar = () => {
                 <button className='btn btn-outline-success' type='submit'>
                   Search
                 </button>
-              </form>
+              </form>} */}
             </div>
           </div>
         </div>

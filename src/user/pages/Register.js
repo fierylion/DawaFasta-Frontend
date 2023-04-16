@@ -42,6 +42,16 @@ const Register = () => {
             password,
           })
           document.cookie = 'Authorization=Bearer ' + data.token
+          localStorage.setItem(
+              'DawaFastaUser',
+              JSON.stringify({
+                user_name: data.data.username,
+                user_id: data.data.id,
+                name: data.data.name,
+                token: data.token,
+              })
+            )
+       
           window.location.pathname = 'user/' + data.data.username
         } catch (err) {
           const data = err.response.data;

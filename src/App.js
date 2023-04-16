@@ -8,11 +8,16 @@ import About from './pages/About'
 import User from './user'
 //Company
 import Company from './company'
+import Home from './pages/Home'
+import { useMajorGlobalContext } from './context'
 function App() {
+  const {remMainNav} = useMajorGlobalContext();
+  
   return (
     <Router>
-      <Navbar/>
+  <Navbar/>
       <Routes>
+      <Route path='/' element={<Home/>}/>
         <Route path='/register' element={<Register/>} />
         <Route path='/about' element={<About/>}/>
         <Route path='/user/*' element={<User/>} />
