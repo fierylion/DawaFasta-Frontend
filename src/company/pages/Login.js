@@ -15,6 +15,7 @@ const Login = () => {
     [true, 'valid-feedback'],
     [false, 'invalid-feedback'],
   ])
+
   const handleSubmit = (e) => {
     e.preventDefault()
     const name = e.target.name.value
@@ -29,7 +30,14 @@ const Login = () => {
             password,
           })
           document.cookie = 'Authorization=Bearer ' + data.token
-          setLoading(false)
+          localStorage.setItem('DawaFasta', JSON.stringify(
+            {isUser:false, 'company': {
+              company_id: data.data.id,
+              company_name: data.data.name,
+              company_description: data.data.description,
+              token:data.token
+            }}
+          ))
           window.location.pathname = 'company/' + data.data.name
         } catch (err) {
           console.log(err)

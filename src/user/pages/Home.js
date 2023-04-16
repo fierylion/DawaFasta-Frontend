@@ -10,6 +10,7 @@ import Login from './Login'
 const Home = () => {
  const [loading, setLoading] = useState(false)
  const [information, setInformation] = useState(null)
+ const [load, setLoad] = useState(false)
  const {details} = useMajorGlobalContext();
  const {dispatch} = useGlobalContext();
  useEffect(() => {
@@ -35,7 +36,7 @@ const Home = () => {
     }
    }
    fetchData()
- }, [details])
+ }, [details,load])
  if(loading) return <div>Loading.....</div>;
  
   return (
@@ -66,7 +67,7 @@ const Home = () => {
                   quantity={med.quantity}
                   company={med.company.name}
                   comp_desc={med.company.description}
-                  {...{
+                  {...{ load, setLoad,
                     name,
                     medId, 
                     solid,

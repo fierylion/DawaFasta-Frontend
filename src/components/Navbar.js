@@ -7,6 +7,7 @@ import {AiFillSetting} from 'react-icons/ai'
 import {BiPurchaseTagAlt} from 'react-icons/bi'
 import {CgLogOut} from 'react-icons/cg'
 import { useMajorGlobalContext } from '../context'
+import {HiOutlineViewGridAdd} from 'react-icons/hi'
 const Navbar = () => {
   const {authenticatee, details, setDetails, setAuthenticatee} = useMajorGlobalContext();
   return (
@@ -53,66 +54,111 @@ const Navbar = () => {
                     Home
                   </a>
                 </li>
-                {authenticatee===''&& (
+                {authenticatee === '' && (
                   <li className='nav-item'>
                     <a
                       className='nav-link active'
                       aria-current='page'
                       href='/register'
                     >
-                     Register
+                      Register
                     </a>
                   </li>
                 )}
-                { authenticatee==='user' &&
-                <>
-                  <li className='nav-item mx-4'>
-                    <a
-                      className='nav-link active'
-                      aria-current='page'
-                      href={`/user/${details.user_name}`}
-                    >
-                     <ImProfile/> My Profile
-                    </a>
-                  </li>
-                  <li className='nav-item mx-4'>
-                    <a
-                      className='nav-link active'
-                      aria-current='page'
-                      href={`/user/${details.user_name}/settings`}
-                    >
-                      <AiFillSetting/> Settings
-                    </a>
-                  </li>
-                  <li className='nav-item mx-4'>
-                    <a
-                      className='nav-link active'
-                      aria-current='page'
-                      href={`/user/${details.user_name}/purchases`}
-                    >
-                     <BiPurchaseTagAlt/> My Purchases
-                    </a>
-                  </li>
-                  <li className='nav-item mx-4'>
-                    <button
-                      className='btn btn-danger'
-                      aria-current='page'
-                      onClick={()=>{
-                        setAuthenticatee('')
-                        setDetails('')
-                        localStorage.clear()
-                      }}
-                    >
-                     <CgLogOut/> Log out
-                    </button>
-                  </li>
-                </>}
+                {authenticatee === 'user' && (
+                  <>
+                    <li className='nav-item mx-4'>
+                      <a
+                        className='nav-link active'
+                        aria-current='page'
+                        href={`/user/${details.user_name}`}
+                      >
+                        <ImProfile /> My Profile
+                      </a>
+                    </li>
+                    <li className='nav-item mx-4'>
+                      <a
+                        className='nav-link active'
+                        aria-current='page'
+                        href={`/user/${details.user_name}/settings`}
+                      >
+                        <AiFillSetting /> Settings
+                      </a>
+                    </li>
+                    <li className='nav-item mx-4'>
+                      <a
+                        className='nav-link active'
+                        aria-current='page'
+                        href={`/user/${details.user_name}/purchases`}
+                      >
+                        <BiPurchaseTagAlt /> My Purchases
+                      </a>
+                    </li>
+                    <li className='nav-item mx-4'>
+                      <button
+                        className='btn btn-danger'
+                        aria-current='page'
+                        onClick={() => {
+                          setAuthenticatee('')
+                          setDetails('')
+                          localStorage.clear()
+                        }}
+                      >
+                        <CgLogOut /> Log out
+                      </button>
+                    </li>
+                  </>
+                )}
+                {authenticatee === 'company' && (
+                  <>
+                    <li className='nav-item mx-4'>
+                      <a
+                        className='nav-link active'
+                        aria-current='page'
+                        href={`/company/${details.company_name}`}
+                      >
+                        <ImProfile /> Company Profile
+                      </a>
+                    </li>
+                    <li className='nav-item mx-4'>
+                      <a
+                        className='nav-link active'
+                        aria-current='page'
+                        href={`/company/${details.company_name}/create`}
+                      >
+                        <HiOutlineViewGridAdd/> Create Medicine
+                      </a>
+                    </li>
+                    <li className='nav-item mx-4'>
+                      <a
+                        className='nav-link active'
+                        aria-current='page'
+                        href={`/company/${details.company_name}/purchases`}
+                      >
+                        <BiPurchaseTagAlt /> Orders
+                      </a>
+                    </li>
+                    <li className='nav-item mx-4'>
+                      <button
+                        className='btn btn-danger'
+                        aria-current='page'
+                        onClick={() => {
+                          setAuthenticatee('')
+                          setDetails('')
+                          localStorage.clear()
+                        }}
+                      >
+                        <CgLogOut /> Log out
+                      </button>
+                    </li>
+                  </>
+                )}
                 <li className='nav-item'>
                   <a className='nav-link active' href='/about'>
                     About Us
                   </a>
                 </li>
-                {authenticatee==='' && (
+                {authenticatee === '' && (
                   <li className='nav-item dropdown'>
                     <a
                       className='nav-link dropdown-toggle'

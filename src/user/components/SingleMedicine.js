@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import medicine from '../../images/medicine_demo.png'
 import dawaFasta from '../../dawafastaAPI'
 import BadLoginCredentials from './BadLoginCredentials'
-const SingleMedicine = ({name, description, price, quantity, company,solid, owners, manufacturer, manufactured, expiry, medId, compId, userId, userName, token}) => {
+const SingleMedicine = ({name, description, price, quantity, company,solid, owners, manufacturer, manufactured, expiry, medId, compId, userId, userName, token, load, setLoad}) => {
  const [loading, setLoading] = useState(false);
- const [insufficient, setInsufficient] = useState(true)
+ const [insufficient, setInsufficient] = useState(false)
+ const [current, setCurrent] = useState(0)
+ 
  const handleSubmit = (e)=>{
   e.preventDefault()
   const makePurchase = async ()=>{
@@ -21,9 +23,13 @@ const SingleMedicine = ({name, description, price, quantity, company,solid, owne
      }
     })
     if(data.err){
-
+     setInsufficient(true)
     }
-
+    else{
+     setInsufficient(false)
+     setLoad(!load)
+    
+    }
    }catch(err){
     console.log(err)
 
