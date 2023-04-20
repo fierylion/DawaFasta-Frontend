@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useMajorGlobalContext } from '../../context'
-import { useGlobalContext } from '../../user/context';
 import dawaFasta from '../../dawafastaAPI';
-import {BiCartAdd} from 'react-icons/bi'
-import AddMedicine from '../components/AddMedicine';
 import SingleMedicine from '../components/SingleMedicine';
 import Information from '../components/Information';
+import LoadingSpinner from '../../components/Loading'
 const Home = () => {
  const{details} = useMajorGlobalContext();
 const [loading,setLoading ] = useState(false)
 const [information, setInformation] = useState(null);
 const [load, setLoad] = useState(false);
-const[modal, setModal] = useState(false);
 const [deleteLoad, setDeleteLoad] = useState({ state: false, message: '', color:'' })
  useEffect(() => {
    const fetchData = async () => {
@@ -36,7 +33,11 @@ const [deleteLoad, setDeleteLoad] = useState({ state: false, message: '', color:
    fetchData();
   
  }, [details, load])
- if(loading) return <div><h1>Loading......</h1></div>
+ if(loading)  return (
+   <div className='d-flex justify-content-center mt-5'>
+     <LoadingSpinner />
+   </div>
+ )
   return (
     <div>
       <article className='container'>

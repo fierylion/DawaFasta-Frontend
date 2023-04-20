@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import BadLoginCredentials from '../components/BadLoginCredentials'
 import dawaFasta from '../../dawafastaAPI'
+import LoadingSpinner from '../../components/Loading'
 const Login = () => {
   const [nameClass, setNameClass]= useState(null)
   const [passClass, setPassClass] = useState(null)
@@ -44,8 +45,8 @@ const Login = () => {
   }
  }
  if(loading) return(
-  <div>
-    <h1>Loading........</h1>
+  <div className='d-flex justify-content-center mt-5'>
+    <LoadingSpinner/>
   </div>
  )
 

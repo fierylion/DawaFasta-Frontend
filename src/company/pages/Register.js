@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import dawaFasta from '../../dawafastaAPI'
 import BadLoginCredentials from '../components/BadLoginCredentials'
+import LoadingSpinner from '../../components/Loading'
 const Register = () => {
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
@@ -33,7 +34,19 @@ const Register = () => {
              password,
              description
            })
-           document.cookie = 'Authorization=Bearer ' + data.token
+            document.cookie = 'Authorization=Bearer ' + data.token
+            localStorage.setItem(
+              'DawaFasta',
+              JSON.stringify({
+                isUser: false,
+                company: {
+                  company_id: data.data.id,
+                  company_name: data.data.name,
+                  company_description: data.data.description,
+                  token: data.token,
+                },
+              })
+            )
            window.location.pathname = 'company/' + data.data.name
          } catch (err) {
            const data = err.response.data
@@ -56,8 +69,8 @@ const Register = () => {
    }
    if (loading)
      return (
-       <div>
-         <h1>Loading......</h1>
+       <div className='d-flex justify-content-center mt-5'>
+         <LoadingSpinner />
        </div>
      )
   return (

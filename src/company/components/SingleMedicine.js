@@ -1,20 +1,14 @@
 import React, { useState, useRef } from 'react'
 import medicine from '../../images/medicine_demo.png'
 import dawaFasta from '../../dawafastaAPI'
-import BadLoginCredentials from './BadLoginCredentials'
 import Information from './Information'
 import { useMajorGlobalContext } from '../../context'
-import { redirect } from 'react-router-dom'
-const SingleMedicine = ({name, description, price, quantity, company,solid, owners, manufacturer, manufactured, expiry, medId, compId, setDeleteLoad,  token, load, setLoad}) => {
+const SingleMedicine = ({name, description, price, quantity,solid, owners, manufacturer, manufactured, expiry, medId, compId, setDeleteLoad,  token, load, setLoad}) => {
   const {details} = useMajorGlobalContext();
- const [loading, setLoading] = useState(false);
  const [edit, setEdit] = useState({state:false, message:'', color:''})
 const deleteRef = useRef()
  
- const handleSubmit = (e)=>{
-  e.preventDefault()
-  
- }
+
  const handleStartEdit=(medId)=>{
   setEdit({state:true, message:'', medId})
 
@@ -26,7 +20,7 @@ const deleteRef = useRef()
     try
   {
     setDeleteLoad({ state: true, message: 'Deleting.....', color:'danger' })
-    const {data}= await dawaFasta.delete(`/company/${compId}/medicine/${medId}`, {
+    await dawaFasta.delete(`/company/${compId}/medicine/${medId}`, {
       headers:{
         Authorization: 'Bearer '+ token
       }
@@ -50,7 +44,7 @@ const deleteRef = useRef()
     const postData = async ()=>{
       setEdit({state:true, message:'Submitting...', color:'warning'})
       try{
-        const {data} = await dawaFasta.patch(`/company/${compId}/medicine/${medId}`,{price, quantity}, {
+      await dawaFasta.patch(`/company/${compId}/medicine/${medId}`,{price, quantity}, {
           headers:{
             Authorization:'Bearer ' +token
           }
@@ -72,7 +66,7 @@ const deleteRef = useRef()
 
   return (
     <div className='card  single-medicine m-4 shadow bg-white'>
-      <img className='card-img-top' src={medicine} alt='Card image cap' />
+      <img className='card-img-top' src={medicine} alt='Medicine' />
       <div className='card-body '>
         <h5 className='card-title text-secondary text-center'>{name}</h5>
         <div className='d-flex flex-column text-muted content-data ms-3 '>

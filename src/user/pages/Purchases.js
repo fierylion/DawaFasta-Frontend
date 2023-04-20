@@ -1,6 +1,7 @@
 import React, {useState, useEffect } from 'react'
 import dawaFasta from '../../dawafastaAPI';
 import { useMajorGlobalContext } from '../../context';
+import LoadingSpinner from '../../components/Loading'
 
 const Purchases = () => {
  const [loading, setLoading ] = useState(false);
@@ -33,7 +34,12 @@ const Purchases = () => {
    fetchHistory()
   }, [details]
  )
- if(loading) return <div><h1>Loading.....</h1></div> 
+ if(loading) return (
+   <div className='d-flex justify-content-center mt-5'>
+     <LoadingSpinner />
+   </div>
+ )
+
  return (
     <section className='container mt-5'>
       <table className='table table-dark table-striped'>

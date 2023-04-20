@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import dawaFasta from '../../dawafastaAPI'
 import SingleMedicine from '../components/SingleMedicine'
 import { useMajorGlobalContext } from '../../context'
+import LoadingSpinner from '../../components/Loading'
 const Home = () => {
  const [loading, setLoading] = useState(false)
  const [information, setInformation] = useState(null)
@@ -29,7 +30,11 @@ const Home = () => {
    }
    fetchData()
  }, [details,load])
- if(loading) return <div>Loading.....</div>;
+ if(loading) return (
+   <div className='d-flex justify-content-center mt-5'>
+     <LoadingSpinner />
+   </div>
+ )
  
   return (
     <article className='container'>
