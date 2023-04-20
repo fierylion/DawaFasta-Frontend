@@ -1,6 +1,5 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Loading from './components/Loading'
 import Navbar from './components/Navbar'
 import Register from './pages/Register'
 import About from './pages/About'
@@ -9,9 +8,7 @@ import User from './user'
 //Company
 import Company from './company'
 import Home from './pages/Home'
-import { useMajorGlobalContext } from './context'
 function App() {
-  const {remMainNav} = useMajorGlobalContext();
   
   return (
     <Router>

@@ -1,18 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import dawaFasta from '../../dawafastaAPI'
-import { useParams } from 'react-router'
-import obtainToken from '../obtainToken'
-import { useGlobalContext } from '../context'
 import SingleMedicine from '../components/SingleMedicine'
 import { useMajorGlobalContext } from '../../context'
-import {redirect} from 'react-router-dom'
-import Login from './Login'
 const Home = () => {
  const [loading, setLoading] = useState(false)
  const [information, setInformation] = useState(null)
  const [load, setLoad] = useState(false)
  const {details} = useMajorGlobalContext();
- const {dispatch} = useGlobalContext();
  useEffect(() => {
    const fetchData = async () => {
     try{
@@ -23,9 +17,7 @@ const Home = () => {
       'Authorization': 'Bearer '+details.token
      }
     })
-    console.log(data)
     setInformation(data.Medicines)
-    dispatch({type:'SET_DETAILS', payload:{...data.User}})
    }
     }catch(err){
      console.log(err)

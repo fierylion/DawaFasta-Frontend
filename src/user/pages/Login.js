@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import BadLoginCredentials from '../components/BadLoginCredentials'
 import dawaFasta from '../../dawafastaAPI'
 const Login = () => {

@@ -1,7 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import logo from '../images/logo.png'
-import BsFillCaretDownFill from 'react-icons/bs'
 import {ImProfile} from 'react-icons/im'
 import {AiFillSetting} from 'react-icons/ai'
 import {BiPurchaseTagAlt} from 'react-icons/bi'
@@ -129,15 +127,7 @@ const Navbar = () => {
                         <HiOutlineViewGridAdd/> Create Medicine
                       </a>
                     </li>
-                    <li className='nav-item mx-4'>
-                      <a
-                        className='nav-link active'
-                        aria-current='page'
-                        href={`/company/${details.company_name}/purchases`}
-                      >
-                        <BiPurchaseTagAlt /> Orders
-                      </a>
-                    </li>
+                   
                     <li className='nav-item mx-4'>
                       <button
                         className='btn btn-danger'

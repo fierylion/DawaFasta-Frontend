@@ -55,7 +55,7 @@ const Purchases = () => {
           <td>{medicine}</td>
           <td>{company}</td>
           <td>{amount}</td>
-          <td>{status}</td>
+          <td className={`text-${(status==='pending')?'muted':'success'}`}>{status}</td>
           </tr>
          )
 

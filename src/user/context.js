@@ -1,17 +1,11 @@
-import React,{useContext, useEffect, useReducer} from 'react'
-import reducer from './reducer'
+import React,{useContext} from 'react'
 const AppContext = React.createContext();
-const initialState = {
- detailSet:false,
-  name:'',
-  username:'',
-  birthdate:''
-}
+
 
 const AppProvider = ({children})=>{
- const [state, dispatch] = useReducer(reducer, initialState)
+ 
  return (
-  <AppContext.Provider value={{...state, dispatch}}>
+  <AppContext.Provider>
    {children}
   </AppContext.Provider>
  )

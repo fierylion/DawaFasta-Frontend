@@ -1,4 +1,4 @@
-import React, { useReducer, useState, useEffect } from 'react'
+import React, { useState} from 'react'
 import dawaFasta from '../../dawafastaAPI';
 import BadLoginCredentials from '../components/BadLoginCredentials';
 const Register = () => {

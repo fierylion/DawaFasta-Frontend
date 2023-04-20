@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import ProtectRoute from './components/ProtectRoute'
 import Medicine from './pages/Medicine'
 import { AppProvider } from './context'
+import Orders from './pages/Orders'
 const App = () => {
   return (
     <AppProvider>
@@ -25,6 +26,14 @@ const App = () => {
           element={
             <ProtectRoute>
               <Home />
+            </ProtectRoute>
+          }
+        />
+        <Route
+          path='/:company/medicine/:MedID/orders'
+          element={
+            <ProtectRoute>
+              <Orders />
             </ProtectRoute>
           }
         />
