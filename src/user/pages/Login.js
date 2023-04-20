@@ -68,7 +68,7 @@ const Login = () => {
                 className={`form-control ${info.get(nameClass)}`}
                 name='name'
                 id='name'
-                placeholder='Company name..'
+                placeholder='Customer name..'
                 required
               />
               <div className={descr.get(nameClass)}>
