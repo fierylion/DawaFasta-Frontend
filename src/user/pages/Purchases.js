@@ -2,7 +2,7 @@ import React, {useState, useEffect } from 'react'
 import dawaFasta from '../../dawafastaAPI';
 import { useMajorGlobalContext } from '../../context';
 import LoadingSpinner from '../../components/Loading'
-
+import timeFormatter from '../../timeFormatter'
 const Purchases = () => {
  const [loading, setLoading ] = useState(false);
  const [history, setHistory] = useState([])
@@ -20,7 +20,19 @@ const Purchases = () => {
      }
     }
     )
-   setHistory(data.data)
+    const obtainedData = [...data.data]
+    obtainedData.sort((a, b) =>  {
+      const date1 = new Date(a.time)
+      const date2 = new Date(b.time)
+      if (date1 < date2) {
+        return 1
+      } else if (date1 > date2) {
+        return -1
+      } else {
+        return 0
+      }
+    })
+   setHistory(obtainedData)
    }} catch(err){
     console.log(err)
 
@@ -56,13 +68,19 @@ const Purchases = () => {
         {history.map((hist)=>{
          const {id, medicine, company, amount, time, status } = hist;
          return (
-          <tr key={id}>
-          <td>{time}</td>
-          <td>{medicine}</td>
-          <td>{company}</td>
-          <td>{amount}</td>
-          <td className={`text-${(status==='pending')?'muted':'success'}`}>{status}</td>
-          </tr>
+           <tr key={id}>
+             <td className='text-info'>
+               <small>{timeFormatter(time)}</small>
+             </td>
+             <td>{medicine}</td>
+             <td>{company}</td>
+             <td>{amount}</td>
+             <td
+               className={`text-${status === 'pending' ? 'muted' : 'success'}`}
+             >
+               {status}
+             </td>
+           </tr>
          )
 
         })}

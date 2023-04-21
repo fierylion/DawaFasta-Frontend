@@ -2,6 +2,8 @@ import React, {useState, useEffect } from 'react'
 import dawaFasta from '../../dawafastaAPI';
 import { useMajorGlobalContext } from '../../context';
 import { useParams } from 'react-router-dom';
+import timeFormatter from '../../timeFormatter';
+import LoadingSpinner from '../../components/Loading'
 
 const Orders = () => {
  const [loading, setLoading ] = useState(false);
@@ -24,7 +26,19 @@ const Orders = () => {
     }
     
     )
-    setHistory(data.data)
+    const obtainedData = [...data.data]
+    obtainedData.sort((a, b) => {
+      const date1 = new Date(a.time)
+      const date2 = new Date(b.time)
+      if (date1 < date2) {
+        return 1
+      } else if (date1 > date2) {
+        return -1
+      } else {
+        return 0
+      }
+    })
+    setHistory(obtainedData)
    setMedicineName(data.name)
    }} catch(err){
     console.log(err)
@@ -41,8 +55,8 @@ const Orders = () => {
  )
  if (loading)
    return (
-     <div>
-       <h1>Loading.....</h1>
+     <div className='d-flex justify-content-center mt-5'>
+       <LoadingSpinner />
      </div>
    ) 
    const handleShipment = (e, id)=>{
@@ -99,7 +113,7 @@ const Orders = () => {
             const { id, customer_name, amount, time, status } = hist
             return (
               <tr key={id}>
-                <td>{time}</td>
+                <td>{timeFormatter(time)}</td>
                 <td>{customer_name}</td>
                 <td>{amount}</td>
                 <td>{status}</td>

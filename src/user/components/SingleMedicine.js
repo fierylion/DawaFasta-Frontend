@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import medicine from '../../images/medicine_demo.png'
 import dawaFasta from '../../dawafastaAPI'
 import BadLoginCredentials from './BadLoginCredentials'
+import LoadingSpinner from '../../components/Loading'
 const SingleMedicine = ({name, description, price, quantity, company,solid, owners, manufacturer, manufactured, expiry, medId, compId, userId, token, load, setLoad}) => {
  const [loading, setLoading] = useState(false);
  const [insufficient, setInsufficient] = useState(false)
@@ -80,7 +81,9 @@ const SingleMedicine = ({name, description, price, quantity, company,solid, owne
           </p>
         </div>
         {loading ? (
-          <h1>Loading.....</h1>
+          <div className='d-flex justify-content-center mt-5'>
+            <LoadingSpinner />
+          </div>
         ) : (
           <div className='d-flex justify-content-around'>
             <span className='text-success '>
